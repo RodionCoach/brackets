@@ -21,36 +21,50 @@ module.exports = function check(str, bracketsConfig) {
             /* flag = 0; */
           }
         } else {
-          console.log('Char',char);
           stack.push(char);
         }
       }
     }
-    if (stack.reduce((a, b) => (a[b] = a[b] + 1 || 1) && a, {})['|'] % 2 == 0) {
-      let index = 0;
-      while (index !== -1) {
-        index = stack.indexOf('|');
-        if(index !== -1) stack.splice(index, 1);
+    if (stack.reduce((a, b) => (a[b] = a[b] + 1 || 1) && a, {})['|'] % 2 === 0) {
+      let index;
+      index = stack.lastIndexOf('|') - 1;
+      if(!(stack[index] == '(' || stack[index] == '[' || stack[index] == '{')){
+        index = 0;
+        while (index !== -1) {
+          index = stack.indexOf('|');
+          if(index !== -1) stack.splice(index, 1);
+        }
+      }else{
+        return false;
       }
     }
-    if (stack.reduce((a, b) => (a[b] = a[b] + 1 || 1) && a, {})['7'] % 2 == 0) {
-      let index = 0;
-      while (index !== -1) {
-        index = stack.indexOf('7');
-        if(index !== -1) stack.splice(index, 1);
+    if (stack.reduce((a, b) => (a[b] = a[b] + 1 || 1) && a, {})['7'] % 2 === 0) {
+      let index;
+      index = stack.lastIndexOf('7') - 1;
+      if(!(stack[index] == '8')){
+        index = 0;
+        while (index !== -1) {
+          index = stack.indexOf('7');
+          if(index !== -1) stack.splice(index, 1);
+        }
+      }else{
+        return false;
       }
     }
-    if (stack.reduce((a, b) => (a[b] = a[b] + 1 || 1) && a, {})['8'] % 2 == 0) {
-      let index = 0;
-      while (index !== -1) {
-        index = stack.indexOf('8');
-        if(index !== -1) stack.splice(index, 1);
+    if (stack.reduce((a, b) => (a[b] = a[b] + 1 || 1) && a, {})['8'] % 2 === 0) {
+      let index;
+      index = stack.lastIndexOf('8') - 1;
+      if(!(stack[index] == '7')){
+        index = 0;
+        while (index !== -1) {
+          index = stack.indexOf('8');
+          if(index !== -1) stack.splice(index, 1);
+        }
+      }else{
+        return false;
       }
     }
   }
 
-  if (0) {
-
-  }
   return stack.length == 0;
 }
